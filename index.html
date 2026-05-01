@@ -3,79 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cronograma Huangzin</title>
+    <title>Patrocínios do Huangzin</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <style>
         :root { --twitch-purple: #9146ff; --bg-dark: #0e0e10; --card-bg: #1f1f23; --accent: #00ff7f; }
         
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-dark); color: white; margin: 0; padding: 15px; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-dark); color: white; margin: 0; padding: 12px; }
         
-        /* CONTAINER EQUILIBRADO */
         .container { width: 100%; margin: auto; transition: 0.3s; }
         
+        /* Ajuste de Tela */
         @media (min-width: 900px) {
-            .container { max-width: 850px; } 
-            .prices { grid-template-columns: repeat(3, 1fr); gap: 12px; }
-            h1 { font-size: 2rem !important; }
+            .container { max-width: 800px; } 
+            .prices { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+            h1 { font-size: 1.8rem !important; }
         }
 
         @media (max-width: 899px) {
-            .container { max-width: 480px; } 
-            .prices { grid-template-columns: 1fr 1fr; gap: 8px; }
-            h1 { font-size: 1.3rem; }
+            .container { max-width: 100%; } 
+            .prices { grid-template-columns: 1fr 1fr; gap: 6px; }
+            h1 { font-size: 1.2rem; }
+            .p-item b { font-size: 1rem !important; }
+            .p-item span { font-size: 0.65rem !important; }
         }
 
-        .header { text-align: center; margin-bottom: 20px; border-bottom: 3px solid var(--twitch-purple); padding-bottom: 10px; }
+        .header { text-align: center; margin-bottom: 15px; border-bottom: 2px solid var(--twitch-purple); padding-bottom: 8px; }
         
-        /* GRUPO DE PREÇOS AJUSTADO */
-        .prices { display: grid; margin-bottom: 25px; }
+        .prices { display: grid; margin-bottom: 20px; }
         .p-item { 
             background: var(--card-bg); 
-            padding: 12px; 
-            border-radius: 8px; 
-            border-left: 4px solid var(--twitch-purple); 
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            padding: 10px; 
+            border-radius: 6px; 
+            border-left: 3px solid var(--twitch-purple); 
         }
-        .p-item b { color: var(--accent); font-size: 1.1rem; display: block; margin-bottom: 2px; }
-        .p-item span { font-size: 0.75rem; color: #adadb8; line-height: 1.2; text-transform: uppercase; font-weight: bold; }
+        .p-item b { color: var(--accent); font-size: 1.1rem; display: block; }
+        .p-item span { font-size: 0.7rem; color: #adadb8; text-transform: uppercase; font-weight: bold; }
 
-        .order-box { background: #18181b; border-radius: 12px; border: 1px solid #333; margin-bottom: 25px; padding: 18px; }
-        input { width: 100%; padding: 12px; margin-bottom: 12px; background: #26262c; border: 1px solid #444; color: white; border-radius: 6px; font-size: 16px; }
+        .order-box { background: #18181b; border-radius: 10px; border: 1px solid #333; margin-bottom: 20px; padding: 15px; }
+        input { width: 100%; padding: 12px; margin-bottom: 10px; background: #26262c; border: 1px solid #444; color: white; border-radius: 6px; font-size: 16px; }
 
-        .btn-pix { background: var(--accent); color: black; border: none; width: 100%; padding: 16px; border-radius: 8px; font-weight: 800; font-size: 1.1rem; cursor: pointer; text-transform: uppercase; }
+        /* Botão apenas com PATROCINAR */
+        .btn-pix { background: var(--accent); color: black; border: none; width: 100%; padding: 15px; border-radius: 8px; font-weight: 800; font-size: 1.1rem; cursor: pointer; text-transform: uppercase; }
 
-        .fila-title { font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; font-weight: bold; color: #efeff1; }
+        .fila-title { font-size: 1rem; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; font-weight: bold; }
         .dot { height: 8px; width: 8px; background-color: #ff4646; border-radius: 50%; animation: blink 1.5s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-        .card { background: var(--card-bg); margin-bottom: 8px; padding: 12px 18px; border-radius: 8px; border: 1px solid #2d2d30; display: flex; justify-content: space-between; align-items: center; }
-        .card strong { font-size: 1rem; color: #fff; }
+        .card { background: var(--card-bg); margin-bottom: 6px; padding: 10px 15px; border-radius: 6px; border: 1px solid #2d2d30; display: flex; justify-content: space-between; align-items: center; }
+        .card strong { font-size: 0.95rem; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header"><h1>🎥 CRONOGRAMA HUANGZIN</h1></div>
+    <div class="header"><h1>🎥 PATROCÍNIOS DO HUANGZIN</h1></div>
 
-    <!-- VALORES ATUALIZADOS -->
     <div class="prices">
-        <div class="p-item"><b>R$ 5,00</b><span>1 EP Desenho (Até 20 min)</span></div>
-        <div class="p-item"><b>R$ 8,00</b><span>EP Anime (23 a 25 min)</span></div>
-        <div class="p-item"><b>R$ 10,00</b><span>Anime/Série (Até 30 min)</span></div>
-        <div class="p-item"><b>R$ 15,00</b><span>EP Série (Até 1 hora)</span></div>
-        <div class="p-item"><b>R$ 20,00</b><span>Filme (1h40 min)</span></div>
-        <div class="p-item"><b>R$ 25,00</b><span>Filme (2h00 min)</span></div>
+        <div class="p-item"><b>R$ 5,00</b><span>Desenho (Até 20m)</span></div>
+        <div class="p-item"><b>R$ 8,00</b><span>Anime (23-25m)</span></div>
+        <div class="p-item"><b>R$ 10,00</b><span>Anime/Série (30m)</span></div>
+        <div class="p-item"><b>R$ 15,00</b><span>Série (Até 1h)</span></div>
+        <div class="p-item"><b>R$ 20,00</b><span>Filme (1h40)</span></div>
+        <div class="p-item"><b>R$ 25,00</b><span>Filme (2h00)</span></div>
     </div>
 
     <div class="order-box">
-        <input type="text" id="filme" placeholder="Nome do Filme / Série / Anime">
+        <input type="text" id="filme" placeholder="Filme / Série / Anime">
         <input type="text" id="episodios" placeholder="Temporada / Episódio">
         <input type="text" id="usuario" placeholder="Seu Nick na Twitch">
-        <button onclick="processarTudo()" class="btn-pix">PATROCINAR E ATUALIZAR</button>
+        <button onclick="processarTudo()" class="btn-pix">PATROCINAR</button>
     </div>
 
     <div class="fila-title"><span class="dot"></span> LISTA DE EXIBIÇÃO</div>
@@ -92,19 +89,15 @@
         const e = document.getElementById('episodios').value;
         const u = document.getElementById('usuario').value;
 
-        if(!f || !u) return alert("Por favor, preencha os campos obrigatórios!");
+        if(!f || !u) return alert("Preencha os campos!");
 
-        // Envio para a planilha
         fetch(script_google, {
             method: 'POST',
             mode: 'no-cors',
             body: JSON.stringify({conteudo: f, patrocinador: u, duracao: e})
         });
 
-        // Redirect para pagamento
-        const mensagemPix = `PEDIDO: ${f} (${e}) | NICK: ${u}`;
-        window.open(`${link_pagamento}?msg=${encodeURIComponent(mensagemPix)}`, '_blank');
-        alert("Pedido registrado! A fila será atualizada automaticamente.");
+        window.open(`${link_pagamento}?msg=${encodeURIComponent('PEDIDO: '+f+' ('+e+') | NICK: '+u)}`, '_blank');
     }
 
     function atualizarFila() {
@@ -122,7 +115,7 @@
                             <div class="card">
                                 <div>
                                     <strong>${nome}</strong>
-                                    <div style="color:#adadb8; font-size:0.8rem">Por: ${item.Patrocinador || item.patrocinador}</div>
+                                    <div style="color:#adadb8; font-size:0.75rem">Por: ${item.Patrocinador || item.patrocinador}</div>
                                 </div>
                                 <div style="color:var(--accent); font-weight:bold; font-size:0.75rem">${item.Status || 'FILA'}</div>
                             </div>
@@ -133,7 +126,7 @@
         });
     }
 
-    setInterval(atualizarFila, 20000);
+    setInterval(atualizarFila, 15000);
     window.addEventListener('DOMContentLoaded', atualizarFila);
 </script>
 </body>
