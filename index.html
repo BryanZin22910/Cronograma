@@ -5,27 +5,46 @@
     <title>Cronograma de Patrocínios - Huangzin</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <style>
-        :root { --twitch-purple: #9146ff; --bg-dark: #0e0e10; --card-bg: #1f1f23; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: white; padding: 20px; }
-        .container { max-width: 600px; margin: auto; }
+        :root { 
+            --twitch-purple: #9146ff; 
+            --bg-dark: #0e0e10; 
+            --card-bg: rgba(31, 31, 35, 0.9); /* Transparência nos cards */
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0;
+            padding: 20px;
+            color: white;
+            /* IMAGEM DE FUNDO COM PERSONAGENS */
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                        url('https://images.alphacoders.com/605/605592.png'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .container { max-width: 600px; margin: auto; backdrop-filter: blur(5px); padding: 20px; border-radius: 15px; }
         
         .header { text-align: center; border-bottom: 2px solid var(--twitch-purple); padding-bottom: 10px; margin-bottom: 20px; }
+        .header h1 { text-shadow: 2px 2px 4px rgba(0,0,0,0.7); }
         
         /* Tabela de Preços */
         .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 30px; }
-        .price-item { background: var(--card-bg); padding: 10px; border-radius: 4px; border-left: 3px solid var(--twitch-purple); font-size: 13px; }
+        .price-item { background: var(--card-bg); padding: 10px; border-radius: 4px; border-left: 3px solid var(--twitch-purple); font-size: 13px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }
         .price-item b { color: #00ff7f; }
 
         /* Fila Dinâmica */
-        .fila-title { font-size: 1.5rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .fila-title { font-size: 1.5rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
         .live-dot { height: 10px; width: 10px; background-color: #ff0000; border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
 
-        .card { background: var(--card-bg); margin-bottom: 10px; padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
-        .card:hover { transform: scale(1.02); }
-        .status-badge { background: var(--twitch-purple); padding: 5px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; }
+        .card { background: var(--card-bg); margin-bottom: 10px; padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); }
+        .card:hover { transform: scale(1.02); background: rgba(145, 70, 255, 0.2); }
+        .status-badge { background: var(--twitch-purple); padding: 5px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
         
-        .btn-pix { display: block; background: #00ff7f; color: black; text-align: center; padding: 15px; border-radius: 8px; font-weight: bold; text-decoration: none; margin-top: 20px; }
+        .btn-pix { display: block; background: #00ff7f; color: black; text-align: center; padding: 15px; border-radius: 8px; font-weight: bold; text-decoration: none; margin-top: 20px; box-shadow: 0 4px 15px rgba(0, 255, 127, 0.3); transition: 0.3s; }
+        .btn-pix:hover { background: #00cc66; transform: translateY(-2px); }
     </style>
 </head>
 <body>
@@ -51,7 +70,7 @@
 </div>
 
 <script>
-    // COLE O SEU LINK DO GOOGLE SHEETS (CSV) AQUI ABAIXO
+    // LEMBRE-SE DE COLOCAR O SEU LINK DA PLANILHA AQUI NOVAMENTE
     const public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSA7ERgcG00cVALxrJrFC_zTlKLNHULOf6QGdKqYP1t7jFop-Bc80yfEbHR5Bb5jmns1GYlInDp_xGX/pub?output=csv';
 
     function init() {
@@ -73,8 +92,8 @@
                 container.innerHTML += `
                     <div class="card">
                         <div>
-                            <strong>${item.Conteúdo}</strong><br>
-                            <small style="color: #adadb8">Por: ${item.Patrocinador} (${item.Duração})</small>
+                            <strong style="font-size: 1.1rem;">${item.Conteúdo}</strong><br>
+                            <small style="color: #adadb8">Por: ${item.Patrocinador} • ${item.Duração}</small>
                         </div>
                         <div class="status-badge">${item.Status || 'FILA'}</div>
                     </div>
@@ -83,7 +102,7 @@
         });
     }
 
-    setInterval(init, 30000); // Atualiza sozinho a cada 30 segundos
+    setInterval(init, 30000); 
     window.addEventListener('DOMContentLoaded', init);
 </script>
 
