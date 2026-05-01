@@ -8,7 +8,7 @@
         :root { 
             --twitch-purple: #9146ff; 
             --bg-dark: #0e0e10; 
-            --card-bg: rgba(20, 20, 23, 0.85); 
+            --card-bg: rgba(15, 15, 15, 0.8); 
         }
 
         body { 
@@ -16,54 +16,88 @@
             margin: 0;
             padding: 20px;
             color: white;
-            /* FUNDO COM PERSONAGENS DIVERSOS (FILMES, ANIMES, SERIES) */
-            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)), 
-                        url('https://wallpaperaccess.com/full/358502.jpg'); 
+            /* FUNDO MISTO: ANIMES, DESENHOS E FILMES */
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.85)), 
+                        url('https://wallpapercave.com/wp/wp4337222.jpg'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
         }
 
-        .container { max-width: 600px; margin: auto; backdrop-filter: blur(3px); padding: 20px; border-radius: 15px; }
+        .container { max-width: 650px; margin: auto; padding: 20px; border-radius: 15px; }
         
-        .header { text-align: center; border-bottom: 3px solid var(--twitch-purple); padding-bottom: 10px; margin-bottom: 25px; }
-        .header h1 { font-size: 2rem; text-transform: uppercase; letter-spacing: 2px; text-shadow: 3px 3px 6px rgba(0,0,0,0.9); }
+        .header { text-align: center; border-bottom: 4px solid var(--twitch-purple); padding-bottom: 15px; margin-bottom: 25px; }
+        .header h1 { font-size: 2.2rem; text-transform: uppercase; letter-spacing: 3px; text-shadow: 4px 4px 8px rgba(0,0,0,1); margin: 0; }
         
+        /* Tabela de Preços com efeito de vidro */
         .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 35px; }
-        .price-item { background: var(--card-bg); padding: 12px; border-radius: 6px; border-left: 4px solid var(--twitch-purple); font-size: 13px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
-        .price-item b { color: #00ff7f; font-size: 1.1rem; }
+        .price-item { 
+            background: rgba(30, 30, 35, 0.7); 
+            padding: 12px; 
+            border-radius: 8px; 
+            border: 1px solid rgba(145, 70, 255, 0.5);
+            font-size: 13px; 
+            backdrop-filter: blur(4px);
+        }
+        .price-item b { color: #00ff7f; font-size: 1.1rem; display: block; margin-bottom: 2px; }
 
-        .fila-title { font-size: 1.6rem; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; font-weight: bold; }
+        .fila-title { font-size: 1.6rem; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; font-weight: bold; text-shadow: 2px 2px 4px black; }
         .live-dot { height: 12px; width: 12px; background-color: #ff4646; border-radius: 50%; display: inline-block; animation: blink 1.2s infinite; box-shadow: 0 0 10px #ff4646; }
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        .card { background: var(--card-bg); margin-bottom: 12px; padding: 18px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 8px 16px rgba(0,0,0,0.4); }
-        .card:hover { transform: translateY(-3px); border-color: var(--twitch-purple); background: rgba(30, 30, 35, 0.95); }
+        /* Cards da Fila */
+        .card { 
+            background: var(--card-bg); 
+            margin-bottom: 12px; 
+            padding: 18px; 
+            border-radius: 12px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            transition: 0.3s; 
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(6px);
+        }
+        .card:hover { transform: scale(1.02); border-color: var(--twitch-purple); box-shadow: 0 0 20px rgba(145, 70, 255, 0.3); }
         
-        .status-badge { background: var(--twitch-purple); padding: 6px 12px; border-radius: 6px; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+        .status-badge { background: var(--twitch-purple); padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 900; text-transform: uppercase; }
         
-        .btn-pix { display: block; background: #00ff7f; color: black; text-align: center; padding: 18px; border-radius: 10px; font-weight: 900; text-decoration: none; margin-top: 30px; font-size: 1.2rem; text-transform: uppercase; box-shadow: 0 6px 20px rgba(0, 255, 127, 0.4); transition: 0.3s; }
-        .btn-pix:hover { background: #05ffa1; transform: scale(1.02); }
+        .btn-pix { 
+            display: block; 
+            background: #00ff7f; 
+            color: black; 
+            text-align: center; 
+            padding: 20px; 
+            border-radius: 12px; 
+            font-weight: 900; 
+            text-decoration: none; 
+            margin-top: 30px; 
+            font-size: 1.3rem; 
+            text-transform: uppercase; 
+            box-shadow: 0 0 25px rgba(0, 255, 127, 0.4); 
+            transition: 0.3s; 
+        }
+        .btn-pix:hover { background: #05ffa1; transform: translateY(-3px); }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <h1>🎥 Cronograma Huangzin</h1>
+        <h1>🎬 CRONOGRAMA HUANGZIN</h1>
     </div>
 
     <div class="price-grid">
-        <div class="price-item"><b>R$ 5</b><br>Desenho (20m)</div>
-        <div class="price-item"><b>R$ 8</b><br>Anime (25m)</div>
-        <div class="price-item"><b>R$ 10</b><br>Série (30m)</div>
-        <div class="price-item"><b>R$ 15</b><br>Série (1h)</div>
-        <div class="price-item"><b>R$ 20</b><br>Filme (1h40)</div>
-        <div class="price-item"><b>R$ 25</b><br>Filme (2h)</div>
+        <div class="price-item"><b>R$ 5</b> Desenho (20m)</div>
+        <div class="price-item"><b>R$ 8</b> Anime (25m)</div>
+        <div class="price-item"><b>R$ 10</b> Série (30m)</div>
+        <div class="price-item"><b>R$ 15</b> Série (1h)</div>
+        <div class="price-item"><b>R$ 20</b> Filme (1h40)</div>
+        <div class="price-item"><b>R$ 25</b> Filme (2h)</div>
     </div>
 
-    <div class="fila-title"><span class="live-dot"></span> Ordem de Exibição</div>
-    <div id="fila-conteudo">Buscando cronograma...</div>
+    <div class="fila-title"><span class="live-dot"></span> ORDEM DE EXIBIÇÃO</div>
+    <div id="fila-conteudo">Sincronizando com a planilha...</div>
 
     <a href="https://livepix.gg/huangzin" target="_blank" class="btn-pix">PATROCINAR VIA PIX</a>
 </div>
@@ -90,10 +124,10 @@
                 container.innerHTML += `
                     <div class="card">
                         <div>
-                            <strong style="font-size: 1.15rem; color: #fff;">${item.Conteúdo}</strong><br>
-                            <small style="color: #adadb8; font-weight: 500;">Patrocínio: ${item.Patrocinador} • ${item.Duração}</small>
+                            <strong style="font-size: 1.2rem;">${item.Conteúdo}</strong><br>
+                            <small style="color: #adadb8;">Patrocinador: ${item.Patrocinador} | ${item.Duração}</small>
                         </div>
-                        <div class="status-badge">${item.Status || 'AGUARDANDO'}</div>
+                        <div class="status-badge">${item.Status || 'FILA'}</div>
                     </div>
                 `;
             }
