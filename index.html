@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cronograma de Patrocínios - Huangzin</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <style>
+        :root { --twitch-purple: #9146ff; --bg-dark: #0e0e10; --card-bg: #1f1f23; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: white; padding: 20px; }
+        .container { max-width: 600px; margin: auto; }
+        
+        .header { text-align: center; border-bottom: 2px solid var(--twitch-purple); padding-bottom: 10px; margin-bottom: 20px; }
+        
+        /* Tabela de Preços */
+        .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 30px; }
+        .price-item { background: var(--card-bg); padding: 10px; border-radius: 4px; border-left: 3px solid var(--twitch-purple); font-size: 13px; }
+        .price-item b { color: #00ff7f; }
+
+        /* Fila Dinâmica */
+        .fila-title { font-size: 1.5rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .live-dot { height: 10px; width: 10px; background-color: #ff0000; border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
+
+        .card { background: var(--card-bg); margin-bottom: 10px; padding: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+        .card:hover { transform: scale(1.02); }
+        .status-badge { background: var(--twitch-purple); padding: 5px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; }
+        
+        .btn-pix { display: block; background: #00ff7f; color: black; text-align: center; padding: 15px; border-radius: 8px; font-weight: bold; text-decoration: none; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>🎥 Cronograma Huangzin</h1>
+    </div>
+
+    <div class="price-grid">
+        <div class="price-item"><b>R$ 5</b> - Desenho (20m)</div>
+        <div class="price-item"><b>R$ 8</b> - Anime (25m)</div>
+        <div class="price-item"><b>R$ 10</b> - Série (30m)</div>
+        <div class="price-item"><b>R$ 15</b> - Série (1h)</div>
+        <div class="price-item"><b>R$ 20</b> - Filme (1h40)</div>
+        <div class="price-item"><b>R$ 25</b> - Filme (2h)</div>
+    </div>
+
+    <div class="fila-title"><span class="live-dot"></span> Ordem de Exibição</div>
+    <div id="fila-conteudo">Carregando lista...</div>
+
+    <a href="https://livepix.gg/huangzin" target="_blank" class="btn-pix">PATROCINAR VIA PIX</a>
+</div>
+
+<script>
+    // COLE O SEU LINK DO GOOGLE SHEETS (CSV) AQUI ABAIXO
+    const public_spreadsheet_url = 'LINK_DO_SEU_CSV_AQUI';
+
+    function init() {
+        Papa.parse(public_spreadsheet_url, {
+            download: true,
+            header: true,
+            complete: function(results) {
+                renderFila(results.data);
+            }
+        });
+    }
+
+    function renderFila(data) {
+        const container = document.getElementById('fila-conteudo');
+        container.innerHTML = '';
+        
+        data.forEach(item => {
+            if(item.Conteúdo) {
+                container.innerHTML += `
+                    <div class="card">
+                        <div>
+                            <strong>${item.Conteúdo}</strong><br>
+                            <small style="color: #adadb8">Por: ${item.Patrocinador} (${item.Duração})</small>
+                        </div>
+                        <div class="status-badge">${item.Status || 'FILA'}</div>
+                    </div>
+                `;
+            }
+        });
+    }
+
+    setInterval(init, 30000); // Atualiza sozinho a cada 30 segundos
+    window.addEventListener('DOMContentLoaded', init);
+</script>
+
+</body>
+</html>
