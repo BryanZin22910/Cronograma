@@ -2,82 +2,117 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Cronograma Huangzin</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <style>
         :root { --twitch-purple: #9146ff; --bg-dark: #0e0e10; --card-bg: #1f1f23; --accent: #00ff7f; }
         
-        * { box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: white; margin: 0; padding: 15px; }
-        .container { max-width: 500px; margin: auto; }
-        
-        .header { text-align: center; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--twitch-purple); }
-        
-        /* Formulário Simples */
-        .order-box { background: #18181b; padding: 20px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #333; }
-        .order-box h2 { font-size: 1.1rem; margin-top: 0; color: var(--accent); text-align: center; }
-        
-        input { 
-            width: 100%; padding: 14px; margin-bottom: 12px; 
-            background: #26262c; border: 1px solid #3f3f46; 
-            color: white; border-radius: 8px; font-size: 1rem;
+        /* Reset para suavidade no celular */
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            background-color: var(--bg-dark); 
+            color: white; 
+            margin: 0; 
+            padding: 15px;
+            overscroll-behavior: none; /* Evita puxar para atualizar e travar */
         }
+        
+        .container { max-width: 450px; margin: auto; }
+        
+        .header { text-align: center; margin-bottom: 20px; border-bottom: 2px solid var(--twitch-purple); padding-bottom: 10px; }
+        h1 { font-size: 1.4rem; letter-spacing: 1px; }
 
-        /* Lista de Preços Compacta para Celular */
-        .prices { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 20px; }
-        .p-item { background: var(--card-bg); padding: 8px; border-radius: 6px; border-left: 3px solid var(--twitch-purple); font-size: 0.7rem; }
-        .p-item b { color: var(--accent); font-size: 0.85rem; display: block; }
+        /* Tabela de Preços Atualizada */
+        .prices { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+        .p-item { 
+            background: var(--card-bg); 
+            padding: 12px; 
+            border-radius: 8px; 
+            border-left: 4px solid var(--twitch-purple);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .p-item b { color: var(--accent); font-size: 1.1rem; display: block; }
+        .p-item span { font-size: 0.8rem; color: #adadb8; }
 
-        /* Fila de Exibição */
-        .fila-title { font-size: 1.2rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; font-weight: bold; }
-        .dot { height: 10px; width: 10px; background-color: #ff0000; border-radius: 50%; animation: blink 1s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-        .card { background: var(--card-bg); margin-bottom: 10px; padding: 15px; border-radius: 10px; border: 1px solid #2d2d30; }
-        .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
-        .card strong { font-size: 1.05rem; }
-        .status { background: var(--twitch-purple); padding: 3px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; }
+        /* Formulário Otimizado */
+        .order-box { 
+            background: #18181b; 
+            padding: 15px; 
+            border-radius: 12px; 
+            margin-bottom: 25px; 
+            border: 1px solid #333;
+        }
+        input { 
+            width: 100%; 
+            padding: 15px; 
+            margin-bottom: 10px; 
+            background: #26262c; 
+            border: 1px solid #3f3f46; 
+            color: white; 
+            border-radius: 8px; 
+            font-size: 16px; /* Impede o zoom automático no iPhone ao clicar */
+        }
 
         .btn-pix { 
-            background: var(--accent); color: black; border: none; width: 100%; 
-            padding: 16px; border-radius: 10px; font-weight: bold; font-size: 1.1rem; 
-            cursor: pointer; transition: 0.2s; text-transform: uppercase;
+            background: var(--accent); 
+            color: black; 
+            border: none; 
+            width: 100%; 
+            padding: 18px; 
+            border-radius: 10px; 
+            font-weight: 900; 
+            font-size: 1.1rem; 
+            cursor: pointer;
+            text-transform: uppercase;
         }
-        .btn-pix:hover { transform: scale(1.02); background: #05ffa1; }
+
+        /* Fila */
+        .fila-title { font-size: 1.2rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .dot { height: 10px; width: 10px; background-color: #ff4646; border-radius: 50%; animation: blink 1.5s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        .card { 
+            background: var(--card-bg); 
+            margin-bottom: 10px; 
+            padding: 15px; 
+            border-radius: 10px; 
+            border: 1px solid #2d2d30;
+        }
+        .card strong { font-size: 1.1rem; display: block; margin-bottom: 4px; }
+        .card-info { font-size: 0.85rem; color: #adadb8; display: flex; justify-content: space-between; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <h1>🎥 Cronograma Huangzin</h1>
+        <h1>🎥 CRONOGRAMA HUANGZIN</h1>
     </div>
 
-    <!-- Tabela de Preços Rápida -->
+    <!-- Valores Aumentados -->
     <div class="prices">
-        <div class="p-item"><b>R$ 5</b> Desenho (20m)</div>
-        <div class="p-item"><b>R$ 8</b> Anime (25m)</div>
-        <div class="p-item"><b>R$ 10</b> Série (30m)</div>
-        <div class="p-item"><b>R$ 25</b> Filme (2h)</div>
+        <div class="p-item"><b>R$ 10</b><span>Desenho (20m)</span></div>
+        <div class="p-item"><b>R$ 15</b><span>Anime (25m)</span></div>
+        <div class="p-item"><b>R$ 20</b><span>Série (30m)</span></div>
+        <div class="p-item"><b>R$ 30</b><span>Série (1h)</span></div>
+        <div class="p-item"><b>R$ 40</b><span>Filme (Até 2h)</span></div>
+        <div class="p-item"><b>R$ 50</b><span>Filme (2h+)</span></div>
     </div>
 
-    <!-- Formulário Direto -->
     <div class="order-box">
-        <h2>Patrocinar Agora</h2>
-        <input type="text" id="filme" placeholder="Nome do Filme / Série / Anime">
-        <input type="text" id="episodios" placeholder="Qual episódio? (Ex: Ep 05 ou Filme Inteiro)">
-        <input type="text" id="usuario" placeholder="Seu Nick na Twitch">
-
-        <button onclick="enviarPix()" class="btn-pix">Pagar via PIX</button>
+        <input type="text" id="filme" placeholder="Filme / Série / Anime">
+        <input type="text" id="episodios" placeholder="Episódios ou Filme Completo">
+        <input type="text" id="usuario" placeholder="Seu Nick">
+        <button onclick="enviarPix()" class="btn-pix">PATROCINAR VIA PIX</button>
     </div>
 
-    <div class="fila-title"><span class="dot"></span> Próximos da Fila</div>
+    <div class="fila-title"><span class="dot"></span> LISTA DE EXIBIÇÃO</div>
     <div id="lista-fila">Carregando fila...</div>
 </div>
 
 <script>
-    // Seus links configurados
     const planilha_csv = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSA7ERgcG00cVALxrJrFC_zTlKLNHULOf6QGdKqYP1t7jFop-Bc80yfEbHR5Bc5jmns1GYlInDp_xGX/pub?output=csv';
     const link_pagamento = 'https://livepix.gg/huangzin';
 
@@ -87,21 +122,19 @@
         const u = document.getElementById('usuario').value;
 
         if(!f || !u) {
-            alert("Preencha o nome do conteúdo e seu nick!");
+            alert("Por favor, preencha os campos!");
             return;
         }
 
-        // Formata a mensagem para você receber no seu painel
-        const msg = `PEDIDO: ${f} (${e}) - Nick: ${u}`;
-        const linkFinal = `${link_pagamento}?msg=${encodeURIComponent(msg)}`;
-        
-        window.open(linkFinal, '_blank');
+        const msg = `PEDIDO: ${f} (${e}) | NICK: ${u}`;
+        window.open(`${link_pagamento}?msg=${encodeURIComponent(msg)}`, '_blank');
     }
 
-    function atualizarSite() {
+    function atualizarFila() {
         Papa.parse(planilha_csv, {
             download: true,
             header: true,
+            skipEmptyLines: true,
             complete: function(res) {
                 const div = document.getElementById('lista-fila');
                 div.innerHTML = '';
@@ -109,13 +142,10 @@
                     if(item.Conteúdo) {
                         div.innerHTML += `
                             <div class="card">
-                                <div class="card-top">
-                                    <strong>${item.Conteúdo}</strong>
-                                    <span class="status">${item.Status || 'AGUARDANDO'}</span>
-                                </div>
-                                <div style="font-size: 0.85rem; color: #adadb8;">
-                                    Patrocinado por: <b style="color:white">${item.Patrocinador}</b><br>
-                                    Duração: ${item.Duração}
+                                <strong>${item.Conteúdo}</strong>
+                                <div class="card-info">
+                                    <span>Por: ${item.Patrocinador}</span>
+                                    <span style="color:var(--twitch-purple); font-weight:bold">${item.Status || 'FILA'}</span>
                                 </div>
                             </div>
                         `;
@@ -125,8 +155,9 @@
         });
     }
 
-    setInterval(atualizarSite, 30000); // Atualiza a cada 30 segundos
-    window.addEventListener('DOMContentLoaded', atualizarSite);
+    // Intervalo de 30 segundos para não sobrecarregar o processador do celular
+    setInterval(atualizarFila, 30000);
+    window.addEventListener('DOMContentLoaded', atualizarFila);
 </script>
 
 </body>
