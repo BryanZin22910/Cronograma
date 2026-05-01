@@ -9,39 +9,41 @@
         :root { --twitch-purple: #9146ff; --bg-dark: #0e0e10; --card-bg: #1f1f23; --accent: #00ff7f; }
         
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-dark); color: white; margin: 0; padding: 20px; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-dark); color: white; margin: 0; padding: 15px; }
         
-        /* AJUSTE DE TAMANHO: Pequeno no celular, Grande no PC */
+        /* CONTAINER AJUSTADO: Nem gigante, nem minúsculo */
         .container { width: 100%; margin: auto; transition: 0.3s; }
         
         @media (min-width: 900px) {
-            .container { max-width: 1000px; } /* No PC o site fica bem largo */
-            .prices { grid-template-columns: repeat(3, 1fr) ! desperation; }
-            h1 { font-size: 2.5rem !important; }
+            .container { max-width: 800px; } /* Tamanho ideal para PC */
+            .prices { grid-template-columns: repeat(3, 1fr); gap: 15px; }
+            h1 { font-size: 2.2rem !important; }
         }
 
         @media (max-width: 899px) {
-            .container { max-width: 450px; } /* No Celular continua compacto */
-            .prices { grid-template-columns: 1fr 1fr; }
+            .container { max-width: 450px; } /* Compacto para Celular */
+            .prices { grid-template-columns: 1fr 1fr; gap: 8px; }
+            h1 { font-size: 1.4rem; }
         }
 
-        .header { text-align: center; margin-bottom: 30px; border-bottom: 3px solid var(--twitch-purple); padding-bottom: 15px; }
+        .header { text-align: center; margin-bottom: 25px; border-bottom: 3px solid var(--twitch-purple); padding-bottom: 12px; }
         
-        .prices { display: grid; gap: 15px; margin-bottom: 30px; }
-        .p-item { background: var(--card-bg); padding: 15px; border-radius: 10px; border-left: 5px solid var(--twitch-purple); }
-        .p-item b { color: var(--accent); font-size: 1.2rem; display: block; }
+        .prices { display: grid; margin-bottom: 25px; }
+        .p-item { background: var(--card-bg); padding: 12px; border-radius: 8px; border-left: 4px solid var(--twitch-purple); text-align: center; }
+        .p-item b { color: var(--accent); font-size: 1.1rem; display: block; }
+        .p-item span { font-size: 0.8rem; color: #adadb8; }
 
-        .order-box { background: #18181b; padding: 25px; border-radius: 15px; border: 1px solid #333; margin-bottom: 30px; }
-        input { width: 100%; padding: 15px; margin-bottom: 15px; background: #26262c; border: 1px solid #444; color: white; border-radius: 8px; font-size: 16px; }
+        .order-box { background: #18181b; border-radius: 12px; border: 1px solid #333; margin-bottom: 25px; padding: 18px; }
+        input { width: 100%; padding: 12px; margin-bottom: 12px; background: #26262c; border: 1px solid #444; color: white; border-radius: 6px; font-size: 16px; }
 
-        .btn-pix { background: var(--accent); color: black; border: none; width: 100%; padding: 20px; border-radius: 10px; font-weight: 900; font-size: 1.2rem; cursor: pointer; text-transform: uppercase; }
+        .btn-pix { background: var(--accent); color: black; border: none; width: 100%; padding: 16px; border-radius: 8px; font-weight: 800; font-size: 1.1rem; cursor: pointer; text-transform: uppercase; }
 
-        .fila-title { font-size: 1.5rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-        .dot { height: 12px; width: 12px; background-color: #ff4646; border-radius: 50%; animation: blink 1.5s infinite; }
+        .fila-title { font-size: 1.2rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; font-weight: bold; }
+        .dot { height: 10px; width: 10px; background-color: #ff4646; border-radius: 50%; animation: blink 1.5s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-        .card { background: var(--card-bg); margin-bottom: 12px; padding: 20px; border-radius: 12px; border: 1px solid #2d2d30; display: flex; justify-content: space-between; align-items: center; }
-        .card strong { font-size: 1.2rem; }
+        .card { background: var(--card-bg); margin-bottom: 10px; padding: 15px; border-radius: 10px; border: 1px solid #2d2d30; display: flex; justify-content: space-between; align-items: center; }
+        .card strong { font-size: 1.1rem; color: #fff; }
     </style>
 </head>
 <body>
@@ -50,29 +52,29 @@
     <div class="header"><h1>🎥 CRONOGRAMA HUANGZIN</h1></div>
 
     <div class="prices">
-        <div class="p-item"><b>R$ 10</b> Desenho (20m)</div>
-        <div class="p-item"><b>R$ 15</b> Anime (25m)</div>
-        <div class="p-item"><b>R$ 20</b> Série (30m)</div>
-        <div class="p-item"><b>R$ 30</b> Série (1h)</div>
-        <div class="p-item)<b>R$ 40</b> Filme (Até 2h)</div>
-        <div class="p-item"><b>R$ 50</b> Filme (2h+)</div>
+        <div class="p-item"><b>R$ 10</b><span>Desenho (20m)</span></div>
+        <div class="p-item"><b>R$ 15</b><span>Anime (25m)</span></div>
+        <div class="p-item"><b>R$ 20</b><span>Série (30m)</span></div>
+        <div class="p-item"><b>R$ 30</b><span>Série (1h)</span></div>
+        <div class="p-item"><b>R$ 40</b><span>Filme (2h)</span></div>
+        <div class="p-item"><b>R$ 50</b><span>Filme (2h+)</span></div>
     </div>
 
     <div class="order-box">
-        <input type="text" id="filme" placeholder="Nome do Filme / Série / Anime">
-        <input type="text" id="episodios" placeholder="Temporada/Episódio">
-        <input type="text" id="usuario" placeholder="Seu Nick">
+        <input type="text" id="filme" placeholder="Filme / Série / Anime">
+        <input type="text" id="episodios" placeholder="Episódio ou Filme Completo">
+        <input type="text" id="usuario" placeholder="Seu Nick na Twitch">
         <button onclick="processarTudo()" class="btn-pix">PATROCINAR E ATUALIZAR</button>
     </div>
 
     <div class="fila-title"><span class="dot"></span> LISTA DE EXIBIÇÃO</div>
-    <div id="lista-fila">Carregando...</div>
+    <div id="lista-fila">Carregando fila...</div>
 </div>
 
 <script>
     const planilha_csv = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSA7ERgcG00cVALxrJrFC_zTlKLNHULOf6QGdKqYP1t7jFop-Bc80yfEbHR5Bb5jmns1GYlInDp_xGX/pub?output=csv';
     const link_pagamento = 'https://livepix.gg/huangzin';
-    const script_google = 'https://script.google.com/macros/s/AKfycbx7RbAzGssI2lR3qqv54SBnSfKRpETWDlwYbVDxTPBwux-qhs29tfhfUujE8kt1RW-rng/exec';
+    const script_google = 'COLE_AQUI_O_LINK_DA_IMAGEM'; 
 
     function processarTudo() {
         const f = document.getElementById('filme').value;
@@ -81,18 +83,14 @@
 
         if(!f || !u) return alert("Preencha os campos!");
 
-        // 1. Envia para a Planilha via Script
         fetch(script_google, {
             method: 'POST',
             mode: 'no-cors',
             body: JSON.stringify({conteudo: f, patrocinador: u, duracao: e})
         });
 
-        // 2. Abre o Pix
-        const msg = `PEDIDO: ${f} (${e}) | NICK: ${u}`;
-        window.open(`${link_pagamento}?msg=${encodeURIComponent(msg)}`, '_blank');
-        
-        alert("Pedido enviado! Atualize a página em alguns segundos.");
+        window.open(`${link_pagamento}?msg=${encodeURIComponent('PEDIDO: '+f+' ('+e+') | NICK: '+u)}`, '_blank');
+        alert("Enviado! A fila atualizará em breve.");
     }
 
     function atualizarFila() {
@@ -103,15 +101,16 @@
             complete: function(res) {
                 const div = document.getElementById('lista-fila');
                 div.innerHTML = '';
-                res.data.reverse().forEach(item => { // Inverte para ver os novos primeiro
-                    if(item.Conteúdo || item[0]) {
+                res.data.reverse().forEach(item => {
+                    const nome = item.Conteúdo || item.conteudo;
+                    if(nome) {
                         div.innerHTML += `
                             <div class="card">
                                 <div>
-                                    <strong>${item.Conteúdo || item.conteudo}</strong>
-                                    <div style="color:#adadb8; font-size:0.9rem">Por: ${item.Patrocinador || item.patrocinador}</div>
+                                    <strong>${nome}</strong>
+                                    <div style="color:#adadb8; font-size:0.85rem">Por: ${item.Patrocinador || item.patrocinador}</div>
                                 </div>
-                                <div style="color:var(--accent); font-weight:bold">${item.Status || 'FILA'}</div>
+                                <div style="color:var(--accent); font-weight:bold; font-size:0.8rem">${item.Status || 'FILA'}</div>
                             </div>
                         `;
                     }
@@ -120,7 +119,7 @@
         });
     }
 
-    setInterval(atualizarFila, 15000);
+    setInterval(atualizarFila, 20000);
     window.addEventListener('DOMContentLoaded', atualizarFila);
 </script>
 </body>
